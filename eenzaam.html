@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitale Studentencirkel - KPN Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .notification-badge {
+            animation: bounce 1s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                        <span class="text-2xl">🎓</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">Digitale Studentencirkel</h1>
+                        <p class="text-sm opacity-90">Powered by KPN</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="p-2 bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition-all">
+                            <span class="text-xl">🔔</span>
+                        </button>
+                        <div class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center notification-badge">
+                            <span class="text-xs font-bold">3</span>
+                        </div>
+                    </div>
+                    <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                        <span class="text-xl">👤</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        <!-- Welcome Section -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <div class="text-center mb-6">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Welkom bij jouw studentencommunity! 👋</h2>
+                <p class="text-gray-600 text-lg">Vind je tribe, maak nieuwe vrienden en deel je passies</p>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="text-center p-4 bg-blue-50 rounded-xl">
+                    <div class="text-3xl font-bold text-blue-600">1,247</div>
+                    <div class="text-gray-600">Actieve studenten</div>
+                </div>
+                <div class="text-center p-4 bg-green-50 rounded-xl">
+                    <div class="text-3xl font-bold text-green-600">23</div>
+                    <div class="text-gray-600">Cirkelgroepen</div>
+                </div>
+                <div class="text-center p-4 bg-purple-50 rounded-xl">
+                    <div class="text-3xl font-bold text-purple-600">156</div>
+                    <div class="text-gray-600">Events deze maand</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buddy Match Section -->
+        <div class="bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl shadow-lg p-8 mb-8 text-white">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-2xl font-bold mb-2">🤝 Jouw Buddy Match</h3>
+                    <p class="text-pink-100 mb-4">We hebben iemand gevonden die perfect bij je past!</p>
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center text-2xl">
+                            👩‍🎓
+                        </div>
+                        <div>
+                            <div class="font-semibold text-lg">Emma - Psychologie Student</div>
+                            <div class="text-pink-100">Gemeenschappelijke interesses: Mindfulness, Koken, Boeken</div>
+                        </div>
+                    </div>
+                    <button onclick="connectBuddy()" class="bg-white text-pink-600 px-6 py-3 rounded-full font-semibold hover:bg-pink-50 transition-all">
+                        Verbinden 💬
+                    </button>
+                </div>
+                <div class="hidden md:block text-6xl pulse-animation">
+                    💝
+                </div>
+            </div>
+        </div>
+
+        <!-- Circle Groups -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Populaire Cirkelgroepen</h3>
+                <button onclick="showAllGroups()" class="text-blue-600 hover:text-blue-700 font-semibold">
+                    Alle groepen bekijken →
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="circleGroups">
+                <!-- Groups will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Upcoming Events -->
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">🗓️ Aankomende Events</h3>
+            <div class="space-y-4" id="upcomingEvents">
+                <!-- Events will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Join Group Modal -->
+    <div id="joinModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-md mx-4">
+            <div class="text-center mb-6">
+                <div class="text-4xl mb-4" id="modalEmoji">🎯</div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2" id="modalTitle">Lid worden van groep</h3>
+                <p class="text-gray-600" id="modalDescription">Je staat op het punt om lid te worden van deze geweldige community!</p>
+            </div>
+            <div class="space-y-4">
+                <button onclick="confirmJoin()" class="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-all">
+                    Ja, ik doe mee! 🎉
+                </button>
+                <button onclick="closeModal()" class="w-full bg-gray-200 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-300 transition-all">
+                    Misschien later
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="successToast" class="fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-xl shadow-lg transform translate-x-full transition-transform duration-300 z-50">
+        <div class="flex items-center space-x-2">
+            <span class="text-xl">✅</span>
+            <span class="font-semibold">Gelukt! Je bent nu lid van de groep</span>
+        </div>
+    </div>
+
+    <script>
+        const circleGroups = [
+            {
+                name: "Sport & Fitness",
+                emoji: "🏃‍♀️",
+                members: 234,
+                description: "Voor alle sportliefhebbers! Van yoga tot voetbal.",
+                color: "from-orange-400 to-red-500",
+                newPosts: 12
+            },
+            {
+                name: "Koken & Eten",
+                emoji: "👨‍🍳",
+                members: 189,
+                description: "Deel recepten en organiseer kookavonden samen.",
+                color: "from-yellow-400 to-orange-500",
+                newPosts: 8
+            },
+            {
+                name: "Internationale Studenten",
+                emoji: "🌍",
+                members: 156,
+                description: "Verbind met studenten van over de hele wereld.",
+                color: "from-blue-400 to-purple-500",
+                newPosts: 15
+            },
+            {
+                name: "Mentale Gezondheid",
+                emoji: "🧘‍♀️",
+                members: 98,
+                description: "Een veilige ruimte voor ondersteuning en mindfulness.",
+                color: "from-green-400 to-teal-500",
+                newPosts: 6
+            },
+            {
+                name: "Gaming",
+                emoji: "🎮",
+                members: 267,
+                description: "Gamers unite! Vind je gaming buddies hier.",
+                color: "from-purple-400 to-pink-500",
+                newPosts: 23
+            },
+            {
+                name: "Studie Support",
+                emoji: "📚",
+                members: 145,
+                description: "Samen studeren is leuker en effectiever!",
+                color: "from-indigo-400 to-blue-500",
+                newPosts: 9
+            }
+        ];
+
+        const upcomingEvents = [
+            {
+                title: "Gezamenlijke Kookavond",
+                date: "Vrijdag 15 Dec",
+                time: "18:00",
+                location: "Studentenhuis De Brug",
+                attendees: 12,
+                emoji: "🍝"
+            },
+            {
+                title: "Mindfulness Workshop",
+                date: "Zaterdag 16 Dec",
+                time: "14:00",
+                location: "Online via KPN Meet",
+                attendees: 8,
+                emoji: "🧘‍♀️"
+            },
+            {
+                title: "Gaming Tournament",
+                date: "Zondag 17 Dec",
+                time: "20:00",
+                location: "Online",
+                attendees: 24,
+                emoji: "🏆"
+            }
+        ];
+
+        function renderCircleGroups() {
+            const container = document.getElementById('circleGroups');
+            container.innerHTML = circleGroups.map(group => `
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover cursor-pointer" onclick="joinGroup('${group.name}', '${group.emoji}', '${group.description}')">
+                    <div class="bg-gradient-to-r ${group.color} p-6 text-white">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="text-4xl">${group.emoji}</div>
+                            <div class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-semibold">
+                                ${group.members} leden
+                            </div>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">${group.name}</h4>
+                        <p class="text-sm opacity-90">${group.description}</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm text-gray-600">
+                                ${group.newPosts} nieuwe berichten
+                            </div>
+                            <div class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-semibold">
+                                Lid worden
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderUpcomingEvents() {
+            const container = document.getElementById('upcomingEvents');
+            container.innerHTML = upcomingEvents.map(event => `
+                <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all cursor-pointer">
+                    <div class="text-3xl">${event.emoji}</div>
+                    <div class="flex-1">
+                        <div class="font-semibold text-gray-800">${event.title}</div>
+                        <div class="text-sm text-gray-600">${event.date} om ${event.time} • ${event.location}</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm text-gray-600">${event.attendees} deelnemers</div>
+                        <button onclick="joinEvent('${event.title}')" class="text-blue-600 hover:text-blue-700 font-semibold text-sm">
+                            Aanmelden
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function joinGroup(name, emoji, description) {
+            document.getElementById('modalTitle').textContent = `Lid worden van ${name}`;
+            document.getElementById('modalEmoji').textContent = emoji;
+            document.getElementById('modalDescription').textContent = description;
+            document.getElementById('joinModal').classList.remove('hidden');
+            document.getElementById('joinModal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('joinModal').classList.add('hidden');
+            document.getElementById('joinModal').classList.remove('flex');
+        }
+
+        function confirmJoin() {
+            closeModal();
+            showSuccessToast();
+        }
+
+        function connectBuddy() {
+            showSuccessToast("Verbonden met Emma! Je kunt nu chatten 💬");
+        }
+
+        function joinEvent(eventName) {
+            showSuccessToast(`Aangemeld voor ${eventName}! 🎉`);
+        }
+
+        function showSuccessToast(message = "Gelukt! Je bent nu lid van de groep") {
+            const toast = document.getElementById('successToast');
+            toast.querySelector('span:last-child').textContent = message;
+            toast.classList.remove('translate-x-full');
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+            }, 3000);
+        }
+
+        function showAllGroups() {
+            alert('Hier zou je naar een pagina gaan met alle beschikbare cirkelgroepen! 🔍');
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCircleGroups();
+            renderUpcomingEvents();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98325bb963595c4c',t:'MTc1ODU0OTkzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
